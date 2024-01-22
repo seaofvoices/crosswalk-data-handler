@@ -1,0 +1,36 @@
+{
+  "name": "crosswalk-data-handler",
+  "version": "0.1.0",
+  "description": "A crosswalk module to handle Player data",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seaofvoices/crosswalk-data-handler.git"
+  },
+  "main": "src/init.lua",
+  "keywords": [
+    "luau",
+    "roblox",
+    "crosswalk",
+    "data",
+    "player"
+  ],
+  "scripts": {
+    "build": "sh ./scripts/build.sh",
+    "clean": "rm -rf node_modules build temp",
+    "format": "stylua .",
+    "lint": "sh ./scripts/analyze.sh && selene src",
+    "lint:luau": "sh ./scripts/analyze.sh",
+    "lint:selene": "selene src",
+    "prepare": "npmluau",
+    "style-check": "stylua . --check",
+    "verify-pack": "yarn pack --dry-run"
+  },
+  "dependencies": {
+    "luau-signal": "^0.1.0"
+  },
+  "devDependencies": {
+    "npmluau": "^0.1.1"
+  },
+  "packageManager": "yarn@4.0.2"
+}
