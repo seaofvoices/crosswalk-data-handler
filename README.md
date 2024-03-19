@@ -94,6 +94,13 @@ Retrieves the data associated with a specific player and raises an error if the 
 - **Returns:**
   - `Data`: The player's data.
 
+#### `restoreDefault<Data>(player: Player)`
+
+Updates the data associated with a specific player to match the default value.
+
+- **Parameters:**
+  - `player`: The player for whom data is to be restored.
+
 ### Example
 
 ```lua
@@ -133,6 +140,22 @@ local success = Modules.DataHandler.savePlayer(player)
 ```
 
 Manually triggers the saving of a player's data.
+
+## Restore to Default Player Data
+
+```lua
+local success = Modules.DataHandler.restorePlayer(player)
+```
+
+Restore the player data to the default value and save the changes.
+
+## Erase Player Data
+
+```lua
+local success = Modules.DataHandler.erasePlayer(player)
+```
+
+Erase all the player data and save the changes.
 
 ## License
 

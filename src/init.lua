@@ -136,16 +136,18 @@ return function(_, _, _)
             )
         end
 
-        local loadedData = {}
+        local loadedData: { [Player]: Data } = setmetatable({}, { __mode = 'k' }) :: any
+        local playersData = PlayersData.new(loadedData, getDefault)
 
         registeredData[dataName] = {
             getDefault = getDefault,
             onLoaded = onLoaded,
             onRemoved = onRemoved,
             loadedData = loadedData,
+            playersData = playersData,
         }
 
-        return PlayersData.new(loadedData)
+        return playersData
     end
 
     function module.connectToDataReady(onDataReady: (player: Player) -> ()): () -> ()
@@ -163,6 +165,30 @@ return function(_, _, _)
         end
 
         return savePlayer(player, data)
+    end
+
+    function module.erasePlayer(player: Player): boolean
+        local data = playerDatas[player]
+
+        if data ~= nil then
+            for _, info in registeredData do
+                info.playersData:restoreDefault(player)
+            end
+        end
+
+        return savePlayer(player, nil)
+    end
+
+    function module.restorePlayer(player: Player): boolean
+        local data = playerDatas[player]
+
+        if data ~= nil then
+            for _, info in registeredData do
+                info.playersData:restoreDefault(player)
+            end
+        end
+
+        return module.savePlayer(player)
     end
 
     function module.OnPlayerReady(player: Player)
