@@ -5,21 +5,21 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
+"@crosswalk-game/data-handler@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@crosswalk-game/data-handler@workspace:."
+  dependencies:
+    luau-signal: "npm:^0.1.0"
+    npmluau: "npm:^0.1.1"
+  languageName: unknown
+  linkType: soft
+
 "commander@npm:^11.0.0":
   version: 11.1.0
   resolution: "commander@npm:11.1.0"
   checksum: 13cc6ac875e48780250f723fb81c1c1178d35c5decb1abb1b628b3177af08a8554e76b2c0f29de72d69eef7c864d12613272a71fabef8047922bc622ab75a179
   languageName: node
   linkType: hard
-
-"crosswalk-data-handler@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "crosswalk-data-handler@workspace:."
-  dependencies:
-    luau-signal: "npm:^0.1.0"
-    npmluau: "npm:^0.1.1"
-  languageName: unknown
-  linkType: soft
 
 "luau-signal@npm:^0.1.0":
   version: 0.1.0
