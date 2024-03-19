@@ -106,7 +106,7 @@ Updates the data associated with a specific player to match the default value.
 ```lua
 local playerDatas
 
-function module.Start()
+function module.Init()
     playerDatas = Modules.DataHandler.register("stats", function()
         return {
             points = 0,
