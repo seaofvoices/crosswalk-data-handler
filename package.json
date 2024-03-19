@@ -1,5 +1,5 @@
 {
-  "name": "crosswalk-data-handler",
+  "name": "@crosswalk-game/data-handler",
   "version": "0.1.0",
   "description": "A crosswalk module to handle Player data",
   "license": "MIT",

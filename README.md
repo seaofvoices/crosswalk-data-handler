@@ -1,4 +1,4 @@
-# crosswalk-data-handler
+# DataHandler
 
 A crosswalk module to handle Player data.
 
@@ -8,16 +8,16 @@ Instead of having a centralized place where all the player data is contained and
 
 ## Installation
 
-Add `crosswalk-data-handler` in your dependencies:
+Add `@crosswalk-game/data-handler` in your dependencies:
 
 ```bash
-yarn add crosswalk-data-handler
+yarn add @crosswalk-game/data-handler
 ```
 
 Or if you are using `npm`:
 
 ```bash
-npm install crosswalk-data-handler
+npm install @crosswalk-game/data-handler
 ```
 
 ## Initialization
@@ -25,7 +25,7 @@ npm install crosswalk-data-handler
 In one of your crosswalk server module's `Init` function, call the `config` function to configure the data handling settings.
 
 ```lua
-DataHandler.config({
+Modules.DataHandler.config({
     dataStoreName = "YourDataStoreName",
     -- optional settings
     autoSaveInterval = 45,
@@ -107,7 +107,7 @@ Updates the data associated with a specific player to match the default value.
 local playerDatas
 
 function module.Start()
-    playerDatas = DataHandler.register("stats", function()
+    playerDatas = Modules.DataHandler.register("stats", function()
         return {
             points = 0,
             level = 1,
