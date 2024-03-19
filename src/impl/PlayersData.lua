@@ -1,16 +1,19 @@
 export type PlayersData<Data> = {
     tryGet: (self: PlayersData<Data>, player: Player) -> Data?,
     expect: (self: PlayersData<Data>, player: Player) -> Data,
+    restoreDefault: (self: PlayersData<Data>, player: Player) -> (),
 }
 
 type Private<Data> = {
     _data: { [Player]: Data },
+    _getDefault: () -> Data,
 }
 type PlayersDataStatic = {
-    new: <Data>(data: { [Player]: Data }) -> PlayersData<Data>,
+    new: <Data>(data: { [Player]: Data }, getDefault: () -> Data) -> PlayersData<Data>,
 
     tryGet: <Data>(self: PlayersData<Data>, player: Player) -> Data?,
     expect: <Data>(self: PlayersData<Data>, player: Player) -> Data,
+    restoreDefault: <Data>(self: PlayersData<Data>, player: Player) -> (),
 }
 type PrivatePlayersData<Data> = PlayersData<Data> & Private<Data>
 
@@ -19,9 +22,10 @@ local PlayersDataMetatable = {
     __index = PlayersData,
 }
 
-function PlayersData.new<Data>(data: { [Player]: Data }): PlayersData<Data>
+function PlayersData.new<Data>(data: { [Player]: Data }, getDefault: () -> Data): PlayersData<Data>
     local self: Private<Data> = {
         _data = data,
+        _getDefault = getDefault,
     }
 
     return setmetatable(self, PlayersDataMetatable) :: any
@@ -42,6 +46,26 @@ function PlayersData:expect<Data>(player: Player): Data
     end
 
     return data
+end
+
+function PlayersData:restoreDefault<Data>(player: Player)
+    local self: PrivatePlayersData<Data> = self :: any
+
+    local data = self._data[player]
+
+    if data ~= nil then
+        local default = self._getDefault() :: any
+
+        for key in data :: any do
+            if default[key] == nil then
+                (data :: any)[key] = nil
+            end
+        end
+
+        for key, value in default do
+            (data :: any)[key] = value
+        end
+    end
 end
 
 return PlayersData
