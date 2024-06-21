@@ -106,6 +106,14 @@ Retrieves the data associated with a specific player and raises an error if the 
 - **Returns:**
   - `Data`: The player's data.
 
+#### `forEach<Data>(fn: (player: Player, data: Data) -> ())`
+
+Execute the given `fn` function for every player that has loaded data. The function **must not yield**.
+
+- **Parameters:**
+
+  - `fn`: A function that will be called with every player with loaded data.
+
 #### `restoreDefault<Data>(player: Player)`
 
 Updates the data associated with a specific player to match the default value.
