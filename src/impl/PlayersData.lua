@@ -1,5 +1,6 @@
 export type PlayersData<Data> = {
     tryGet: (self: PlayersData<Data>, player: Player) -> Data?,
+    tryRun: (self: PlayersData<Data>, player: Player, fn: (Data) -> ()) -> boolean,
     expect: (self: PlayersData<Data>, player: Player) -> Data,
     restoreDefault: (self: PlayersData<Data>, player: Player) -> (),
 }
@@ -12,6 +13,7 @@ type PlayersDataStatic = {
     new: <Data>(data: { [Player]: Data }, getDefault: () -> Data) -> PlayersData<Data>,
 
     tryGet: <Data>(self: PlayersData<Data>, player: Player) -> Data?,
+    tryRun: <Data>(self: PlayersData<Data>, player: Player, fn: (Data) -> ()) -> boolean,
     expect: <Data>(self: PlayersData<Data>, player: Player) -> Data,
     restoreDefault: <Data>(self: PlayersData<Data>, player: Player) -> (),
 }
@@ -35,6 +37,18 @@ function PlayersData:tryGet<Data>(player: Player): Data?
     local self: PrivatePlayersData<Data> = self :: any
 
     return self._data[player]
+end
+
+function PlayersData:tryRun<Data>(player: Player, fn: (Data) -> ()): boolean
+    local self: PrivatePlayersData<Data> = self :: any
+
+    local data = self._data[player]
+    if data ~= nil then
+        fn(data)
+        return true
+    end
+
+    return false
 end
 
 function PlayersData:expect<Data>(player: Player): Data
