@@ -83,6 +83,18 @@ Attempts to retrieve the data associated with a specific player.
 - **Returns:**
   - `Data`: The player's data if available, or `nil` if not found.
 
+#### `tryRun<Data>(player: Player, fn: (Data) -> ()): boolean`
+
+Execute the given `fn` function only if data is found for the given `Player`.
+
+- **Parameters:**
+
+  - `player`: The player for whom data is to be retrieved.
+  - `fn`: A function that accepts the data associated with the player.
+
+- **Returns:**
+  - `boolean`: If the `fn` function was called or not.
+
 #### `expect<Data>(player: Player): Data`
 
 Retrieves the data associated with a specific player and raises an error if the data is not available.
